@@ -1,0 +1,17 @@
+{
+  "files": {
+    "sniffyoutube.py": {
+      "name": "Playlist and combined site report",
+      "description": "Defines channel, playlist and watch-page parsers plus Youku/Tencent helpers, then writes a combined dated CSV from local lists. The chinaSina sketch is inside a string, not executable code."
+    },
+    "metasniffer.py": {
+      "name": "OpenGraph metadata exporter",
+      "description": "Imports playListSniff, reads playlist URLs, fetches each video watch page and writes title, description and tag-list rows to metaSniff.csv."
+    },
+    "chinaTest.py": {
+      "name": "Standalone Tencent request experiment",
+      "description": "Reads a local input list at module level, creates requests sessions with browser-like headers, parses Tencent title/count selectors and prints results with delays."
+    }
+  },
+  "routes": {}
+}
