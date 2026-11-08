@@ -1,0 +1,42 @@
+{
+  "schema": "floorplan/source-manifest@1",
+  "repository": "Raleighite/youtube-sniffer",
+  "source_commit": "37100ecaf4f3764e19620f0bd61de4ea99f6e842",
+  "scope": "Static source mapping; no runtime or deployed-state claim.",
+  "source_policy": "Git-tracked/unignored source/config/templates/static per check_freshness.py, including Procfile; docs/tests/dependencies/cache excluded. Baseline is original unredacted source.",
+  "source_files": {
+    "chinaTest.py": "cf6ec78b6cda7ce447ee1fba9fbc11dfdb875870713b55f855218e067a4e7034",
+    "metasniffer.py": "8bd1f0c50ea04e19cfee7d9c0a28c9fbf86c37699ecb909b3ed325147a8dd3f7",
+    "sniffyoutube.py": "edec2784eb447403ca69d2ac26fa7181a4f265210d4758ce5ad5d5a3be5da3c5"
+  },
+  "admitted_snapshot": {
+    "metasniffer.py": "8bd1f0c50ea04e19cfee7d9c0a28c9fbf86c37699ecb909b3ed325147a8dd3f7",
+    "chinaTest.py": "cf6ec78b6cda7ce447ee1fba9fbc11dfdb875870713b55f855218e067a4e7034",
+    "sniffyoutube.py": "edec2784eb447403ca69d2ac26fa7181a4f265210d4758ce5ad5d5a3be5da3c5"
+  },
+  "counts": {
+    "files": 3,
+    "codeFiles": 3,
+    "routes": 0,
+    "modules": 4,
+    "unassigned": 0,
+    "flows": 2,
+    "tour": 3,
+    "links": 4
+  },
+  "artifacts": {
+    "check_freshness.py": "9d941c34d0b3647da6754819c32c51d83cadf2339a6fe7bcbf614c7dc81c22dd",
+    "source-review.json": "607d6dbe967eb2f52cf8fb1b77dc93dd86000bb79ec9d5dbd0fee3a4fa8fc23a",
+    "generator.json": "78e73a690663a5d5a8cbb0a4f8fadd53ab5191d0779f15988e4f7cc2d2eb93fb",
+    "architecture.json": "686daf3fa02deb32d79e655f4ac5597b26a9ac922c422692d162469b8a8305a2",
+    "NOTICE.md": "1b961d21b4feedd4af9be96ea51dd05d1f7cf45304ab4fe88d95ba0cebeada2f",
+    "index.html": "2f7644e0940eae68b9840d079ea6d06df6ccb3095936a562532b0648871244d5",
+    "README.md": "38605435b284944f26e3f009c3cc463a967fa1270f01d3bc020f04fdadd1ace5",
+    "descriptions/reviewed.json": "f7c0a5bb7af736b087605ee876a9227df340cfdc6fc4e6de45a508d24036f010",
+    "tests/test_freshness.py": "a99031f01872d56d1b14430537b999d1ebf455f461919a5cd7641b193e4710a0",
+    "licenses/inter-LICENSE.txt": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345",
+    "licenses/elkjs-LICENSE.md": "89591d4578fb1ebd91501312a3d25f021bd865a2e436641c1cf7b1bc7e3c1617",
+    "licenses/LICENSE": "65a06a9dab105cd5a2b713a41a020a442bd431e6e19631182ed3889fd1672faf",
+    "licenses/jetbrains-mono-LICENSE.txt": "403581b69dac5cff4079205e01c6b467e56af449ecbd7247693ddb1baafa005b"
+  }
+}

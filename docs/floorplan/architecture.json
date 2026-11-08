@@ -1,0 +1,145 @@
+{
+  "$schema": "floorplan/architecture@1",
+  "audience": "everyone",
+  "project": {
+    "name": "youtube-sniffer",
+    "summary": "Three scraping scripts extract historical YouTube playlist metadata or Chinese video-site counts into CSV/text workflows; inputs and outputs are local runtime files not included in the repository.",
+    "entrypoints": [
+      "sniffyoutube.py",
+      "metasniffer.py",
+      "chinaTest.py"
+    ]
+  },
+  "include": [
+    "code",
+    "config",
+    "docs",
+    "other"
+  ],
+  "nodes": [
+    {
+      "id": "playlist",
+      "label": "Playlist and site CSV collection",
+      "summary": "Main script traverses playlists and Chinese-site lists to build a dated CSV.",
+      "paths": [
+        "sniffyoutube.py"
+      ],
+      "kind": "service"
+    },
+    {
+      "id": "metadata",
+      "label": "YouTube metadata CSV",
+      "summary": "Reuses playlist ID extraction and writes OpenGraph metadata for every listed video.",
+      "paths": [
+        "metasniffer.py"
+      ],
+      "kind": "service"
+    },
+    {
+      "id": "experiment",
+      "label": "Tencent request experiment",
+      "summary": "A separate top-level loop uses requests, browser-like headers and a delay.",
+      "paths": [
+        "chinaTest.py"
+      ],
+      "kind": "service"
+    },
+    {
+      "id": "sites",
+      "label": "External video pages",
+      "summary": "HTML selectors depend on historical public site markup, not stable API contracts.",
+      "paths": [],
+      "kind": "external"
+    }
+  ],
+  "edges": [
+    {
+      "from": "playlist",
+      "to": "sites",
+      "label": "Fetch channel playlist and video pages",
+      "description": "Fetch channel playlist and video pages.",
+      "kind": "data"
+    },
+    {
+      "from": "metadata",
+      "to": "playlist",
+      "label": "Reuse playListSniff helper",
+      "description": "Reuse playListSniff helper.",
+      "kind": "data"
+    },
+    {
+      "from": "metadata",
+      "to": "sites",
+      "label": "Fetch OpenGraph metadata",
+      "description": "Fetch OpenGraph metadata.",
+      "kind": "data"
+    },
+    {
+      "from": "experiment",
+      "to": "sites",
+      "label": "Request Tencent pages",
+      "description": "Request Tencent pages.",
+      "kind": "data"
+    }
+  ],
+  "flows": [
+    {
+      "id": "metadata-csv",
+      "title": "Build a metadata CSV from playlist URLs",
+      "steps": [
+        {
+          "node": "metadata",
+          "note": "Read playlist URLs from a separately supplied local text file."
+        },
+        {
+          "node": "playlist",
+          "note": "Extract data-video-id attributes from playlist table rows."
+        },
+        {
+          "node": "metadata",
+          "note": "Fetch each watch page, collect title, description and tags, and write a CSV row."
+        },
+        {
+          "node": "sites",
+          "note": "Supply HTML whose selectors must still match for the script to work."
+        }
+      ]
+    },
+    {
+      "id": "counts-csv",
+      "title": "Build the combined historical view-count report",
+      "steps": [
+        {
+          "node": "playlist",
+          "note": "Read playlist inputs, request channel pages and enumerate playlist video IDs."
+        },
+        {
+          "node": "sites",
+          "note": "Return watch-page titles/counts and Youku/Tencent page fields."
+        },
+        {
+          "node": "playlist",
+          "note": "Write playlist and Chinese-site sections to a date-named CSV, delaying Tencent requests."
+        }
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "node": "playlist",
+      "title": "Files, not an HTTP service",
+      "note": "The scripts declare no inbound handlers. Input lists and generated CSVs are runtime artifacts outside the code map; none was opened or created."
+    },
+    {
+      "node": "metadata",
+      "title": "A real helper connection",
+      "note": "metasniffer imports playListSniff from sniffyoutube. No integration with the separate Tencent experiment is present."
+    },
+    {
+      "node": "experiment",
+      "title": "Historical selectors remain unvalidated",
+      "note": "chinaTest executes a file-reading/network loop at import time. No source module was imported. The commented-out chinaSina sketch is not an active function despite heuristic scanner symbol output."
+    }
+  ],
+  "annotations": []
+}
